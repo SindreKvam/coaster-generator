@@ -1,0 +1,11 @@
+[build-system]
+requires = ["uv_build >= 0.9.9, <0.10.0"]
+build-backend = "uv_build"
+
+[project]
+name = "coaster-generator"
+version = "2025.11"
+dependencies = ["opencv-python"]
+
+[project.scripts]
+coaster-generator = "coaster_generator.generate_coaster_svg:main"

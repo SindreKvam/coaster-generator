@@ -1,17 +1,18 @@
 """Script to generate coaster from any image."""
 
 import argparse
+import sys
 from pathlib import Path
 
-from circle_picker import CirclePicker
-from svg import Svg
+from coaster_generator.circle_picker import CirclePicker
+from coaster_generator.svg import Svg
 
 
 def generate_coaster_svg(
     filename: str,
     diameter_mm: float = 100.0,
     margin_mm: float = 5.0,
-    image_path: str | None = None,
+    image_path: str = None,
 ) -> None:
     """Generate an .svg file with a coaster of a given size."""
 
@@ -54,7 +55,9 @@ def generate_coaster_svg(
     svg.export_image(filename)
 
 
-if __name__ == "__main__":
+def main() -> None:
+    """Run script for generating coaster"""
+
     parser = argparse.ArgumentParser()
     parser.add_argument(
         "image_path", help="Path to the image to add to the coaster", type=str
@@ -69,3 +72,7 @@ if __name__ == "__main__":
         args.margin,
         image_path=args.image_path,
     )
+
+
+if __name__ == "__main__":
+    sys.exit(main())
