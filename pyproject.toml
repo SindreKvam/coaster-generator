@@ -1,11 +1,21 @@
 [build-system]
-requires = ["uv_build >= 0.9.9, <0.10.0"]
-build-backend = "uv_build"
+requires = ["hatchling", "uv-dynamic-versioning"]
+build-backend = "hatchling.build"
 
 [project]
 name = "coaster-generator"
-version = "2025.11"
+dynamic = ["version"]
 dependencies = ["opencv-python"]
 
 [project.scripts]
 coaster-generator = "coaster_generator.generate_coaster_svg:main"
+
+[tool.hatch.version]
+source = "uv-dynamic-versioning"
+
+# Important for uv so it invalidates its cache when tags change
+[tool.uv]
+cache-keys = [
+  { file = "pyproject.toml" },
+  { git = { commit = true, tags = true } },
+]
